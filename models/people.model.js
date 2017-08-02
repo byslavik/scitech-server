@@ -8,13 +8,13 @@ var peopleSchema = new Schema({
     "contacts": Array,
     "sphere": String,
     "specialization": String,
-    "publications": Array,
+    "publications": [{ type: Schema.Types.ObjectId, ref: 'Card' }],
     "patents": Array,
     "projects": Array,
     "lang": String
 
 });
 
-var Person = mongoose.model('People', peopleSchema);
+var People = mongoose.model('People', peopleSchema);
 
-module.exports = Person;
+module.exports = People;

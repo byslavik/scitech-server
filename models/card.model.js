@@ -10,7 +10,7 @@ var cardSchema = new Schema({
     "recommendation": String,
     "use": String,
     "tags":  Array,
-    "author": Array,
+    "_author": [{ type: Schema.Types.ObjectId, ref: 'People' }],
     "date": Date,
     "type": String,
     "download": String,

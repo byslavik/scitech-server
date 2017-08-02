@@ -3,6 +3,9 @@ var Company = require('./models/company.model');
 var People = require('./models/people.model');
 var Card = require('./models/card.model');
 
+
+var Schema = mongoose.Schema;
+
 mongoose.Promise = require('q').Promise;
 
 var options = {
@@ -48,31 +51,85 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 });
 
+
+var personSchema = Schema({
+  _id     : Number,
+  name    : String,
+  age     : Number,
+  stories : [{ type: Schema.Types.ObjectId, ref: 'Story' }]
+});
+
+var storySchema = Schema({
+  _creator : { type: Number, ref: 'Person' },
+  title    : String,
+  fans     : [{ type: Number, ref: 'Person' }]
+});
+
+var Story  = mongoose.model('Story', storySchema);
+var Person = mongoose.model('Person', personSchema);
+
+var aaron = new Person({ _id: 0, name: 'Aaron', age: 100 });
+
+// aaron.save(function (err) {
+//   if (err) return handleError(err);
+//
+//   var story1 = new Story({
+//     title: "Once upon a timex.",
+//     _creator: aaron._id    // assign the _id from the person
+//   });
+//
+//   story1.save(function (err) {
+//     if (err) return handleError(err);
+//     // thats it!
+//   });
+// });
+
+// var card = new Card()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Card
 router.route('/cards')
     .get(function(req, res) {
+        Card
+          .find({})
+          .populate("_author",  ['name', 'description'])
+          .exec(function(err, cards) {
+              if (err){
+                  res.send(err);
+              }
 
-        Card.find({},
-            function(err, card) {
-                if (err){
-                    res.send(err);
-                }
-                // res.send(Person);
-                res.json(card);
-            });
+              res.json(cards);
+          })
     });
-router.route('/card/:lang/:id')
+router.route('/card/:id')
     .get(function(req, res) {
-        console.log('lets find smth', req.params.lang, req.params.id);
+        var query = {"_id": req.params.id };
 
-        Card.find({ "lang" : req.params.lang, "_id": req.params.id },
-            function(err, card) {
+        Card
+            .find(query)
+            .populate("_author", ['name', 'description'])
+            .exec(function(err, card) {
                 if (err){
                     res.send(err);
                 }
-                // res.send(Person);
+
                 res.json(card);
-            });
+            })
     });
 
 
@@ -89,11 +146,13 @@ router.route('/persons')
                 res.json(person);
             });
     });
-router.route('/person/:lang/:id')
+router.route('/person/:id')
     .get(function(req, res) {
         console.log('lets find smth', req.params.lang, req.params.id);
 
-        People.find({ "lang" : req.params.lang, "_id": req.params.id },
+        People.find({ "_id": req.params.id })
+        .populate("publications", ['name'])
+        .exec(
             function(err, person) {
                 if (err){
                     res.send(err);
