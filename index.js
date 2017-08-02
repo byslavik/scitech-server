@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Company = require('./models/company.model');
-var Person = require('./models/person.model');
+var People = require('./models/people.model');
 var Card = require('./models/card.model');
 
 mongoose.Promise = require('q').Promise;
@@ -48,18 +48,57 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 });
 
+//Card
+router.route('/cards')
+    .get(function(req, res) {
 
-//Person
-router.route('/person/:lang/:id')
+        Card.find({},
+            function(err, card) {
+                if (err){
+                    res.send(err);
+                }
+                // res.send(Person);
+                res.json(card);
+            });
+    });
+router.route('/card/:lang/:id')
     .get(function(req, res) {
         console.log('lets find smth', req.params.lang, req.params.id);
 
-        Person.find({ "lang" : req.params.lang, "_id": req.params.id },
+        Card.find({ "lang" : req.params.lang, "_id": req.params.id },
+            function(err, card) {
+                if (err){
+                    res.send(err);
+                }
+                // res.send(Person);
+                res.json(card);
+            });
+    });
+
+
+//Persons
+router.route('/persons')
+    .get(function(req, res) {
+
+        People.find({},
             function(err, person) {
                 if (err){
                     res.send(err);
                 }
+                // res.send(Person);
+                res.json(person);
+            });
+    });
+router.route('/person/:lang/:id')
+    .get(function(req, res) {
+        console.log('lets find smth', req.params.lang, req.params.id);
 
+        People.find({ "lang" : req.params.lang, "_id": req.params.id },
+            function(err, person) {
+                if (err){
+                    res.send(err);
+                }
+                // res.send(Person);
                 res.json(person);
             });
     });

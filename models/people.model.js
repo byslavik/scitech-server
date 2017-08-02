@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var personSchema = new Schema({
+var peopleSchema = new Schema({
     "name": String,
     "image": String,
     "description": String,
@@ -15,6 +15,6 @@ var personSchema = new Schema({
 
 });
 
-var Person = mongoose.model('Person', personSchema);
+var Person = mongoose.model('People', peopleSchema);
 
 module.exports = Person;
