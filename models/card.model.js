@@ -28,6 +28,6 @@ var cardSchema = new Schema({
 
 });
 
-var Card = mongoose.model('Card', researchSchema);
+var Card = mongoose.model('Card', cardSchema);
 
 module.exports = Card;

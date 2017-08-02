@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Company = require('./models/company.model');
 var Person = require('./models/person.model');
-var Card = require('./models/cad.model');
+var Card = require('./models/card.model');
 
 mongoose.Promise = require('q').Promise;
 
