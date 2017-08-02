@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
 var Company = require('./models/company.model');
 var Person = require('./models/person.model');
-var Plasma = require('./models/plasma.model');
-var Research = require('./models/research.model');
-var Startup = require('./models/startup.model');
+var Card = require('./models/cad.model');
 
 mongoose.Promise = require('q').Promise;
 
@@ -41,7 +39,6 @@ var port = process.env.PORT || 8084;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-
 router.use(function(req, res, next) {
 
     next();
@@ -67,7 +64,7 @@ router.route('/person/:lang/:id')
             });
     });
 
- 
+
 // more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
