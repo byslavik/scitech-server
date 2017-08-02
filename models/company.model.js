@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var companySchema = new Schema({
-    name: String,
-    industry: String,
-    description: String,
-    site: Array,
-    address: String,
-    vacancy: Array,
-    lang: String
+    "name": String,
+    "industry": String,
+    "description": String,
+    "site": Array,
+    "address": String,
+    "vacancy": Array,
+    "lang": String
 
 });
 
