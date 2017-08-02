@@ -54,7 +54,7 @@ router.route('/person/:lang/:id')
     .get(function(req, res) {
         console.log('lets find smth', req.params.lang, req.params.id);
 
-        Person.find({ "lang" : req.params.lang, "id": req.params.id },
+        Person.find({ "lang" : req.params.lang, "_id": req.params.id },
             function(err, person) {
                 if (err){
                     res.send(err);
