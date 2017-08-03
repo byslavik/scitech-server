@@ -22,6 +22,7 @@ var cardSchema = new Schema({
     "contacts": Array,
     "needTofind": Array,
     "skills": Array,
+    "style": String,
     "materials": Array,
     "info": Array,
     "lang": String
