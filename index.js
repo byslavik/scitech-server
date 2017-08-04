@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-var port = process.env.PORT || 8084;        // set our port
+var port = process.env.PORT || 8085;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -112,6 +112,21 @@ router.route('/person/:id')
                 res.json(person);
             });
     });
+
+    router.route('/search/:word')
+        .get(function(req, res) {
+
+
+            Card.find({ "name": { '$regex' : req.params.word, '$options' : 'i' } })
+            .exec(
+                function(err, person) {
+                    if (err){
+                        res.send(err);
+                    }
+                    // res.send(Person);
+                    res.json(person);
+                });
+        });
 
 
 // more routes for our API will happen here
