@@ -118,6 +118,7 @@ router.route('/person/:id')
 
 
             Card.find({ "name": { '$regex' : req.params.word, '$options' : 'i' } })
+            .populate("publications", ['name'])
             .exec(
                 function(err, person) {
                     if (err){
