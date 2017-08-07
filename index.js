@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Company = require('./models/company.model');
 var People = require('./models/people.model');
 var Card = require('./models/card.model');
+var LangVar = require('./models/langVars.model');
 
 
 var Schema = mongoose.Schema;
@@ -128,6 +129,21 @@ router.route('/person/:lang/:id')
                     res.json(person);
                 });
         });
+
+router.route('/langvars/:lang')
+    .get(function(req, res) {
+
+
+        LangVars.find({"lang": req.params.lang })
+        .exec(
+            function(err, lang) {
+                if (err){
+                    res.send(err);
+                }
+                // res.send(Person);
+                res.json(lang);
+            });
+    });
 
 
 // more routes for our API will happen here
