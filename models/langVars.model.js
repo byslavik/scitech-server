@@ -7,6 +7,6 @@ var langVarSchema = new Schema({
     "lang": String
 });
 
-var LangVar = mongoose.model('LangVar', peopleSchema);
+var LangVar = mongoose.model('LangVar', langVarSchema);
 
 module.exports = LangVar;
