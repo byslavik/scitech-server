@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-var port = process.env.PORT || 8085;        // set our port
+var port = process.env.PORT || 8083;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -140,8 +140,11 @@ router.route('/langvars/:lang')
                 if (err){
                     res.send(err);
                 }
-                // res.send(Person);
-                res.json(lang);
+                let langVars = {};
+                lang.map((item)=>{
+                  langVars[item.key] = item.value;
+                });
+                res.json(langVars);
             });
     });
 
