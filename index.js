@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Company = require('./models/company.model');
 var People = require('./models/people.model');
 var Card = require('./models/card.model');
-var LangVar = require('./models/langVars.model');
+var LangVars = require('./models/langVars.model');
 
 
 var Schema = mongoose.Schema;
