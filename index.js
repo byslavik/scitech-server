@@ -68,6 +68,19 @@ router.route('/cards/:lang')
               res.json(cards);
           })
     });
+    router.route('/cards/:lang/type/:type')
+        .get(function(req, res) {
+            Card
+              .find({"lang": req.params.lang, "type": req.params.type})
+              .populate("_author",  ['name', 'description'])
+              .exec(function(err, cards) {
+                  if (err){
+                      res.send(err);
+                  }
+
+                  res.json(cards);
+              })
+        });
 router.route('/card/:lang/:id')
     .get(function(req, res) {
         var query = {"_id": req.params.id, "lang": req.params.lang };
