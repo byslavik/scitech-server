@@ -59,7 +59,7 @@ router.route('/cards/:lang')
     .get(function(req, res) {
         Card
           .find({"lang": req.params.lang})
-          .populate("_author",  ['name', 'description'])
+          .populate("_author",  ['name', 'description', 'contacts'])
           .exec(function(err, cards) {
               if (err){
                   res.send(err);
