@@ -55,10 +55,10 @@ router.get('/', function(req, res) {
 
 
 //Card
-router.route('/cards/:lang')
+router.route('/cards')
     .get(function(req, res) {
         Card
-          .find({"lang": req.params.lang})
+          .find()
           .populate("_author",  ['name', 'description', 'contacts'])
           .exec(function(err, cards) {
               if (err){
@@ -68,10 +68,10 @@ router.route('/cards/:lang')
               res.json(cards);
           })
     });
-    router.route('/cards/:lang/type/:type')
+    router.route('/cards/type/:type')
         .get(function(req, res) {
             Card
-              .find({"lang": req.params.lang, "type": req.params.type})
+              .find({ "type": req.params.type})
               .populate("_author",  ['name', 'description', 'contacts'])
               .exec(function(err, cards) {
                   if (err){
@@ -81,9 +81,9 @@ router.route('/cards/:lang')
                   res.json(cards);
               })
         });
-router.route('/card/:lang/:id')
+router.route('/card/:id')
     .get(function(req, res) {
-        var query = {"_id": req.params.id, "lang": req.params.lang };
+        var query = {"_id": req.params.id };
 
         Card
             .find(query)
@@ -99,10 +99,10 @@ router.route('/card/:lang/:id')
 
 
 //Persons
-router.route('/persons/:lang')
+router.route('/persons')
     .get(function(req, res) {
 
-        People.find({"lang": req.params.lang},
+        People.find({},
             function(err, person) {
                 if (err){
                     res.send(err);
@@ -111,11 +111,11 @@ router.route('/persons/:lang')
                 res.json(person);
             });
     });
-router.route('/person/:lang/:id')
+router.route('/person/:id')
     .get(function(req, res) {
-        console.log('lets find smth', req.params.lang, req.params.id);
+        console.log('lets find smth',  req.params.id);
 
-        People.find({ "_id": req.params.id, "lang": req.params.lang })
+        People.find({ "_id": req.params.id })
         .populate("publications", ['name'])
         .exec(
             function(err, person) {
@@ -127,11 +127,11 @@ router.route('/person/:lang/:id')
             });
     });
 
-    router.route('/search/:lang/:word')
+    router.route('/search/:word')
         .get(function(req, res) {
 
 
-            Card.find({ "name": { '$regex' : req.params.word, '$options' : 'i' }, "lang": req.params.lang })
+            Card.find({ "name": { '$regex' : req.params.word, '$options' : 'i' } })
             .populate("_author", ['name'])
             .exec(
                 function(err, person) {
