@@ -72,7 +72,7 @@ router.route('/cards/:lang')
         .get(function(req, res) {
             Card
               .find({"lang": req.params.lang, "type": req.params.type})
-              .populate("_author",  ['name', 'description'])
+              .populate("_author",  ['name', 'description', 'contacts'])
               .exec(function(err, cards) {
                   if (err){
                       res.send(err);
@@ -87,7 +87,7 @@ router.route('/card/:lang/:id')
 
         Card
             .find(query)
-            .populate("_author", ['name', 'description'])
+            .populate("_author", ['name', 'description', 'contacts'])
             .exec(function(err, card) {
                 if (err){
                     res.send(err);
