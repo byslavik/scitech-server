@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var peopleSchema = new Schema({
-    "name": String,
+    "name": Array,
     "image": String,
-    "description": String,
+    "description": Array,
     "contacts": Array,
-    "sphere": String,
-    "specialization": String,
+    "sphere": Array,
+    "specialization": Array,
     "publications": [{ type: Schema.Types.ObjectId, ref: 'Card' }],
     "patents": Array,
     "projects": Array,
