@@ -131,7 +131,7 @@ router.route('/person/:id')
         .get(function(req, res) {
 
 
-            Card.find({ "name": { '$regex' : req.params.word, '$options' : 'i' } })
+            Card.find({ $or: [ { "name": { $elemMatch: {"ru": { '$regex' : req.params.word, '$options': 'i' } } } } , { "name": { $elemMatch: {"en": { '$regex' : req.params.word, '$options': 'i' } } } } ] })
             .populate("_author", ['name'])
             .exec(
                 function(err, person) {
