@@ -64,7 +64,16 @@ router.route('/cards')
               if (err){
                   res.send(err);
               }
+              console.log(err);
+              cards.map((item)=> {
+                if(item.customAuthor != undefined && item.customAuthor.length != 0) {
+                  item.customAuthor.map(function(cardItem) {
+                    item._author.push(cardItem);
+                  });
 
+                  delete item.customAuthor;
+                }
+              })
               res.json(cards);
           })
     });
@@ -78,6 +87,17 @@ router.route('/cards')
                       res.send(err);
                   }
 
+                  console.log(cards);
+                  cards.map((item)=> {
+                    if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+                      console.log(item.customAuthor);
+                      item.customAuthor.map(function(cardItem) {
+                        item._author.push(cardItem);
+                      });
+
+                      delete item.customAuthor;
+                    }
+                  })
                   res.json(cards);
               })
         });
@@ -85,17 +105,47 @@ router.route('/card/:id')
     .get(function(req, res) {
         var query = {"_id": req.params.id };
 
-        Card
-            .find(query)
+        Card.find(query)
             .populate("_author", ['name', 'description', 'contacts'])
             .exec(function(err, card) {
                 if (err){
                     res.send(err);
                 }
+                card.map((item)=> {
+                  if(item.customAuthor != undefined && item.customAuthor.length != 0) {
+                    item.customAuthor.map(function(cardItem) {
+                      item._author.push(cardItem);
+                    });
+
+                    delete item.customAuthor;
+                  }
+                })
 
                 res.json(card);
             })
     });
+
+    router.route('/card/add')
+        .post(function(req, res) {
+            let item = req.body;
+            if(item._author != undefined && item._author.length != 0){
+              let authors = [];
+              item._author.map(function(item) {
+                if(item != ''){
+                  authors.push(mongoose.Types.ObjectId(item));
+                }
+              });
+
+              item._author = authors;
+            }
+            let card = new Card(item);
+
+            card.save(function(err) {
+              console.log('saved')
+              res.json({message: "item saved"});
+
+            });
+        });
 
 
 //Persons

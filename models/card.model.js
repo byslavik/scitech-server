@@ -10,22 +10,23 @@ var cardSchema = new Schema({
     "recommendation": Array,
     "use": Array,
     "tags":  Array,
-    "_author": [{ type: Schema.Types.ObjectId, ref: 'People' }],
+    "_author": [{type: String, ref: 'People', required: false }],
     "date": Date,
     "type": String,
     "download": String,
-    "video": Array,
-    "presentation": Array,
+    "video": String,
+    "presentation": String,
     "problem": Array,
     "solution": Array,
-    "demo": Array,
-    "contacts": Array,
+    "demo": String,
+    "stage": Array,
+    "contacts": String,
     "needTofind": Array,
     "skills": Array,
     "style": String,
     "materials": Array,
     "info": Array,
-    "lang": String
+    "customAuthor": Array
 
 });
 
