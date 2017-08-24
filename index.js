@@ -3,6 +3,7 @@ var Company = require('./models/company.model');
 var People = require('./models/people.model');
 var Card = require('./models/card.model');
 var LangVars = require('./models/langVars.model');
+var Dropdown = require('./models/dropdown.model');
 
 
 var Schema = mongoose.Schema;
@@ -146,7 +147,20 @@ router.route('/card/:id')
 
             });
         });
+//Dropdown
 
+router.route('/dropdowns')
+    .get(function(req, res) {
+
+        Dropdown.find({},
+            function(err, dropdowns) {
+                if (err){
+                    res.send(err);
+                }
+                // res.send(Person);
+                res.json(dropdowns);
+            });
+    });
 
 //Persons
 router.route('/persons')
