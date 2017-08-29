@@ -11,7 +11,9 @@ var peopleSchema = new Schema({
     "publications": Array,
     "patents": Array,
     "projects": Array,
-    "lang": String,
+    "site": Array,
+    "address": Array,
+    "job": Array,
     "type": String
 
 });
