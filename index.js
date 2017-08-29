@@ -178,7 +178,7 @@ router.route('/persons/add')
         .post(function(req, res) {
           let item = req.body;
 
-          let person = new Person(item);
+          let person = new People(item);
 
           person.save(function(err) {
             console.log('saved')
