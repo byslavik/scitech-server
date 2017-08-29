@@ -11,7 +11,8 @@ var peopleSchema = new Schema({
     "publications": [{ type: Schema.Types.ObjectId, ref: 'Card' }],
     "patents": Array,
     "projects": Array,
-    "lang": String
+    "lang": String,
+    "type": String
 
 });
 
