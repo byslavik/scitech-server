@@ -8,7 +8,7 @@ var peopleSchema = new Schema({
     "contacts": Array,
     "sphere": Array,
     "specialization": Array,
-    "publications": [{ type: Schema.Types.ObjectId, ref: 'Card' }],
+    "publications": Array,
     "patents": Array,
     "projects": Array,
     "lang": String,
