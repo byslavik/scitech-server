@@ -181,7 +181,7 @@ router.route('/persons/add')
           let person = new People(item);
 
           person.save(function(err) {
-            console.log('saved')
+            console.log('saved', person)
             res.json({message: "item saved"});
 
           });
