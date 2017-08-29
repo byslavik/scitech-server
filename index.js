@@ -174,12 +174,23 @@ router.route('/persons')
                 res.json(person);
             });
     });
+router.route('/persons/add')
+        .post(function(req, res) {
+          let item = req.body;
+
+          let person = new Person(item);
+
+          person.save(function(err) {
+            console.log('saved')
+            res.json({message: "item saved"});
+
+          });
+        });
 router.route('/person/:id')
     .get(function(req, res) {
         console.log('lets find smth',  req.params.id);
 
         People.find({ "_id": req.params.id })
-        .populate("publications", ['name'])
         .exec(
             function(err, person) {
                 if (err){
