@@ -11,7 +11,7 @@ var peopleSchema = new Schema({
     "publications": Array,
     "patents": Array,
     "projects": Array,
-    "site": Array,
+    "site": String,
     "address": Array,
     "job": Array,
     "type": String
