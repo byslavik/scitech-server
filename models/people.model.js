@@ -14,7 +14,8 @@ var peopleSchema = new Schema({
     "site": String,
     "address": Array,
     "job": Array,
-    "type": String
+    "type": String,
+    "isCustom": Boolean
 
 });
 
