@@ -128,11 +128,11 @@ router.route('/card/:id')
     router.route('/card/add')
         .post(function(req, res) {
             let item = req.body;
-            if(item._author != undefined && item._author.length != 0){
+            if(item._author != undefined && item._author.length != 0 && item._author[0].trim() != ""){
               let authors = [];
               item._author.map(function(item) {
-                if(item != ''){
-                  authors.push(mongoose.Types.ObjectId(item));
+                if(item.trim() != ''){
+                  authors.push(mongoose.Types.ObjectId(item.trim()));
                 }
               });
 
