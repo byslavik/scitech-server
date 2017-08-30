@@ -208,12 +208,20 @@ router.route('/person/:id')
             Card.find({ $or: [ { "name": { $elemMatch: {"ru": { '$regex' : req.params.word, '$options': 'i' } } } } , { "name": { $elemMatch: {"en": { '$regex' : req.params.word, '$options': 'i' } } } } ] })
             .populate("_author", ['name'])
             .exec(
-                function(err, person) {
+                function(err, cards) {
                     if (err){
                         res.send(err);
                     }
-                    // res.send(Person);
-                    res.json(person);
+                    cards.map((item)=> {
+                      if(item.customAuthor != undefined && item.customAuthor.length != 0) {
+                        item.customAuthor.map(function(cardItem) {
+                          item._author.push(cardItem);
+                        });
+
+                        delete item.customAuthor;
+                      }
+                    })
+                    res.json(cards);
                 });
         });
 
