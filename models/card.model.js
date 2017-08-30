@@ -26,7 +26,10 @@ var cardSchema = new Schema({
     "style": String,
     "materials": Array,
     "info": Array,
-    "customAuthor": Array
+    "customAuthor": Array,
+    "tenderDeadline": Date,
+    "tenderReward": String
+    
 
 });
 
