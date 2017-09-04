@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-var port = process.env.PORT || 8083;        // set our port
+var port = process.env.PORT || 8084;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -140,7 +140,7 @@ router.route('/card/:id')
               item._author = authors;
             }
 
-            item.creationDate = new Date.now();
+            item.creationDate = new Date;
             let card = new Card(item);
 
             card.save(function(err) {
