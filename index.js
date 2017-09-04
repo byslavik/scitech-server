@@ -138,6 +138,7 @@ router.route('/card/:id')
               });
 
               item._author = authors;
+              item.creationDate = new Date.now();
             }
             let card = new Card(item);
 
