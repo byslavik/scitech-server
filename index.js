@@ -78,10 +78,113 @@ router.route('/cards')
               res.json(cards);
           })
     });
+    router.route('/cards/latest')
+        .get(function(req, res) {
+          let latestItems = [];
+            Card
+              .find({ "type": "Tender"})
+              .sort({"creationDate": 1})
+              .limit(2)
+              .populate("_author",  ['name', 'description', 'contacts'])
+              .exec(function(err, cards) {
+                  if (err){
+                      res.send(err);
+                  }
+
+                  cards.map((item)=> {
+                    if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+
+                      item.customAuthor.map(function(cardItem) {
+                        item._author.push(cardItem);
+                      });
+
+                      delete item.customAuthor;
+                    }
+                  })
+                  latestItems.push(cards)
+              });
+
+
+              Card
+                .find({ "type": "Research"})
+                .sort({"creationDate": 1})
+                .limit(4)
+                .populate("_author",  ['name', 'description', 'contacts'])
+                .exec(function(err, cards) {
+                    if (err){
+                        res.send(err);
+                    }
+
+                    cards.map((item)=> {
+                      if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+
+                        item.customAuthor.map(function(cardItem) {
+                          item._author.push(cardItem);
+                        });
+
+                        delete item.customAuthor;
+                      }
+                    })
+                    latestItems.push(cards)
+                })
+
+
+                Card
+                  .find({ "type": "Startup"})
+                  .sort({"creationDate": 1})
+                  .limit(4)
+                  .populate("_author",  ['name', 'description', 'contacts'])
+                  .exec(function(err, cards) {
+                      if (err){
+                          res.send(err);
+                      }
+
+                      cards.map((item)=> {
+                        if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+
+                          item.customAuthor.map(function(cardItem) {
+                            item._author.push(cardItem);
+                          });
+
+                          delete item.customAuthor;
+                        }
+                      })
+                      latestItems.push(cards)
+                  })
+
+
+                  Card
+                    .find({ "type": "Meetup"})
+                    .sort({"creationDate": 1})
+                    .limit(2)
+                    .populate("_author",  ['name', 'description', 'contacts'])
+                    .exec(function(err, cards) {
+                        if (err){
+                            res.send(err);
+                        }
+
+                        cards.map((item)=> {
+                          if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+
+                            item.customAuthor.map(function(cardItem) {
+                              item._author.push(cardItem);
+                            });
+
+                            delete item.customAuthor;
+                          }
+                        })
+                        latestItems.push(cards);
+
+
+                      res.json(latestItems)
+                    })
+
+        });
     router.route('/cards/type/:type')
         .get(function(req, res) {
             Card
               .find({ "type": req.params.type})
+              .sort({"creationDate": 1})
               .populate("_author",  ['name', 'description', 'contacts'])
               .exec(function(err, cards) {
                   if (err){
