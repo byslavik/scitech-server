@@ -28,8 +28,9 @@ var cardSchema = new Schema({
     "info": Array,
     "customAuthor": Array,
     "tenderDeadline": Date,
-    "tenderReward": String
-    
+    "tenderReward": String,
+    "creationDate": Date
+
 
 });
 
