@@ -101,7 +101,7 @@ router.route('/cards')
                       delete item.customAuthor;
                     }
                   })
-                  latestItems = [...latestItems, cards];
+                  latestItems = [...latestItems, ...cards];
               });
 
 
@@ -125,7 +125,7 @@ router.route('/cards')
                         delete item.customAuthor;
                       }
                     })
-                    latestItems = [...latestItems, cards];
+                    latestItems = [...latestItems, ...cards];
                 })
 
 
@@ -149,7 +149,7 @@ router.route('/cards')
                           delete item.customAuthor;
                         }
                       })
-                      latestItems = [...latestItems, cards];
+                      latestItems = [...latestItems, ...cards];
                   })
 
 
@@ -173,7 +173,7 @@ router.route('/cards')
                             delete item.customAuthor;
                           }
                         })
-                        latestItems = [...latestItems, cards];
+                        latestItems = [...latestItems, ...cards];
 
 
                       res.json(latestItems)
