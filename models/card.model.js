@@ -27,11 +27,14 @@ var cardSchema = new Schema({
     "materials": Array,
     "info": Array,
     "customAuthor": Array,
+    "creationDate": Date,
     "tenderDeadline": Date,
     "tenderReward": String,
-    "creationDate": Date
-
-
+    "status": Array,
+    "place": Array,
+    "regLink": String,
+    "infoLink": String,
+    "description": String
 });
 
 var Card = mongoose.model('Card', cardSchema);
