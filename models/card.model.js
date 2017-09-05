@@ -34,7 +34,8 @@ var cardSchema = new Schema({
     "place": Array,
     "regLink": String,
     "infoLink": String,
-    "description": String
+    "description": String,
+    "eventHolder": String
 });
 
 var Card = mongoose.model('Card', cardSchema);
