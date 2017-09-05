@@ -31,7 +31,7 @@ var cardSchema = new Schema({
     "tenderReward": String,
     "creationDate": Date,
     "status": Array,
-    "place": Array,
+    "meetupPlace": String,
     "regLink": String,
     "infoLink": String,
     "description": String,
