@@ -191,7 +191,7 @@ router.route('/cards')
         .get(function(req, res) {
             Card
               .find({ "type": req.params.type})
-              .sort({"creationDate": 1})
+              .sort({"creationDate": -1})
               .populate("_author",  ['name', 'description', 'contacts'])
               .exec(function(err, cards) {
                   if (err){
