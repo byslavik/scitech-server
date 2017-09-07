@@ -285,7 +285,8 @@ router.route('/persons')
                 }
                 // res.send(Person);
                 res.json(person);
-            });
+            })
+            .sort({"creationDate": -1});
     });
 router.route('/persons/add')
         .post(function(req, res) {
