@@ -35,7 +35,7 @@ var cardSchema = new Schema({
     "meetupPlace": String,
     "regLink": String,
     "infoLink": String,
-    "description": String,
+    "description": Array,
     "eventHolder": String
 });
 
