@@ -12,6 +12,7 @@ var cardSchema = new Schema({
     "tags":  Array,
     "_author": [{type: String, ref: 'People', required: false }],
     "date": Date,
+    "dateTo": Date,
     "type": String,
     "download": String,
     "video": String,
