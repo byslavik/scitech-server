@@ -291,7 +291,7 @@ router.route('/persons')
 router.route('/persons/add')
         .post(function(req, res) {
           let item = req.body;
-
+          item.creationDate = new Date;
           let person = new People(item);
 
           person.save(function(err) {
