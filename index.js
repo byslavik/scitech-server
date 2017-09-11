@@ -3,6 +3,7 @@ var People = require('./models/people.model');
 var Card = require('./models/card.model');
 var LangVars = require('./models/langVars.model');
 var Dropdown = require('./models/dropdown.model');
+var Article = require('./models/article.model');
 
 
 var Schema = mongoose.Schema;
@@ -235,7 +236,19 @@ router.route('/card/:id')
                 res.json(card);
             })
     });
+router.route('/article/:id')
+    .get(function(req, res) {
+        var query = {"_id": req.params.id };
 
+        Article.find(query)
+            .exec(function(err, article) {
+                if (err){
+                    res.send(err);
+                }
+
+                res.json(article);
+            })
+    });
     router.route('/card/add')
         .post(function(req, res) {
             let item = req.body;
