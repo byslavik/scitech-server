@@ -7,6 +7,6 @@ var articleSchema = new Schema({
     "description": Array
 });
 
-var Article = mongoose.model('Article', cardSchema);
+var Article = mongoose.model('Article', articleSchema);
 
 module.exports = Article;
