@@ -14,7 +14,7 @@ var options = {
     useMongoClient: true
 };
 
-var mongodbUri = 'mongodb://scitechuser:scitech2017@ds119533.mlab.com:19533/heroku_q6vt1794';
+var mongodbUri = 'mongodb://scitechuser:scitech2017@ds151024.mlab.com:51024/heroku_8x24w9z4';
 
 mongoose.connect(mongodbUri, options);
 var conn = mongoose.connection;
@@ -213,6 +213,43 @@ router.route('/cards')
                   res.json(cards);
               })
         });
+        router.route('/cards/filter/:type/:name/:filter')
+        .get(function(req, res) {
+
+          function handleFind() {
+            
+            if(!req.params.filter) {
+              return {"type":req.params.type}
+            }
+
+            return { "type":req.params.type, [req.params.name]: { $in: req.params.filter.split(',')}}
+          }
+
+            Card
+              .find(handleFind())
+              .sort({"creationDate": -1})
+              .populate("_author",  ['name', 'description', 'contacts'])
+              .exec(function(err, cards) {
+                  if (err){
+                      res.send(err);
+                  }
+
+                  if(cards){
+                    cards.map((item)=> {
+                      if(item.customAuthor != undefined && item.customAuthor != null && item.customAuthor.length != 0) {
+                        console.log(item.customAuthor);
+                        item.customAuthor.map(function(cardItem) {
+                          item._author.push(cardItem);
+                        });
+
+                        delete item.customAuthor;
+                      }
+                    })
+                    res.json(cards);
+                  }
+              })
+        });
+
 router.route('/card/:id')
     .get(function(req, res) {
         var query = {"_id": req.params.id };
