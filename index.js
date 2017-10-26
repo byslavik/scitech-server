@@ -109,7 +109,7 @@ router.route('/cards')
                   Card
                     .find({ "type": "Research"})
                     .sort({"creationDate": -1})
-                    .limit(4)
+                    .limit(6)
                     .populate("_author",  ['name', 'description', 'contacts'])
                     .exec(function(err, cards) {
                         if (err){
